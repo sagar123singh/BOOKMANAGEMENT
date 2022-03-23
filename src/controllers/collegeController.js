@@ -11,8 +11,13 @@ const internModel = require("../models/internModel")
 const createCollege = async function (req, res) {
     try {
         let data = req.body
+        
         let {name, fullName, logoLink, isDeleted } = req.body
+        if(Object.keys(req.body).length==0) res.status(400).send({status:false, msg:"Bad request"})
         if(!name) res.status(400).send({status:false, msg:"name is required"})
+        if(!(/^[a-z]*$/.test(data.name))){
+            return res.status(400).send({status:false,msg:"invalid name"})
+         }
         if(!fullName) res.status(400).send({status:false, msg:"fullName is required"})
         if(!logoLink) res.status(400).send({status:false, msg:"logoLink is required"})
 

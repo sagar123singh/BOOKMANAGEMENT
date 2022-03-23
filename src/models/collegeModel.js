@@ -6,7 +6,8 @@ const collegeSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        trim: true
+        trim: true,
+        match:/^[a-z]*$/
     },
     fullName: {
         type: String,
