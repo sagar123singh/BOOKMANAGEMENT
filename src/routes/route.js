@@ -1,24 +1,41 @@
 const express = require('express');
 const router = express.Router();
 
-const userController = require('../controllers/userController')
+const userController= require("../controllers/userController")
+const bookController = require("../controllers/bookController")
+const reviewController = require("../controllers/reviewController")
+const auth=require("../middleware/auth")
 
 
-
-
-router.get("/test-me", function (req, res) {
-    res.send("My first ever api!")
-})
 
 router.post('/register', userController.createUser)
 
+router.post('/login', userController.loginUser)
+
+
+//////////************----------------*************---------------------*********/////////
+
+router.post('/creation',auth.Authorise,bookController.createBook)
+
+router.get('/books',bookController.getBook)
+
+router.get('/books/:bookId',bookController.getBookWithReview)
+
+router.put('/books/:bookId',auth.Authorise, auth.Authorise, bookController.updateBooks)
+
+router.delete('/books/:bookId',auth.Authorise, bookController.deleteBook)
 
 
 
 
-router.get('*', function(req, res){
-    res.status(404).send({status:false, ERROR:"page not found"});
-  });
+//////////************----------------*************---------------------*********/////////
+
+router.post('/books/:bookId/review', reviewController.bookReview)
+
+router.put('/books/:bookId/review/:reviewId', reviewController.updateReview)
+
+router.delete('/books/:bookId/review/:reviewId', reviewController.deleteReview)
+
 
 
 
