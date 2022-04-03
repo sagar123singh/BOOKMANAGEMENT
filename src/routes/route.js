@@ -17,9 +17,9 @@ router.post('/login', userController.loginUser)
 
 router.post('/creation',auth.Authorise,bookController.createBook)
 
-router.get('/books',bookController.getBook)
+router.get('/books',auth.Authorise,bookController.getBook)
 
-router.get('/books/:bookId',bookController.getBookWithReview)
+router.get('/books/:bookId',auth.Authorise,bookController.getBookWithReview)
 
 router.put('/books/:bookId',auth.Authorise, auth.Authorise, bookController.updateBooks)
 

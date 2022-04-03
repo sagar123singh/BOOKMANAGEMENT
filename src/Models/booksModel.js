@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const moment = require('moment');
 const ObjectId = mongoose.Schema.Types.ObjectId
 
 
@@ -37,7 +36,11 @@ const BooksSchema = new mongoose.Schema({
     
     },
 
-    subcategory: [{type:String,required:true, trim:true}],
+    subcategory: {
+        type:[String],
+        required: true,
+        trim:true
+    },
 
     reviews: {
         type:Number,
@@ -46,21 +49,20 @@ const BooksSchema = new mongoose.Schema({
 
     deletedAt: {
         type: Date,
-        default: null
+     //default: null
         
     }, 
 
     isDeleted:{
         type: Boolean,
         default: false
-        
     },
 
     releasedAt:{
 
         type: Date,
         required:true,
-       default: Date.now(),
+       //  default: Date.now(),
     }
 
 
